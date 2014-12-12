@@ -16,7 +16,7 @@ TMPROOT=/tmp/deploy
 # Deployment settings
 
 CALL_ROOT="$( cd "$( dirname "$0" )" && pwd )"
-$CALL_ROOT/deploy.config.sh $1
+source $CALL_ROOT/deploy.config.sh
 
 
 # Deploy
@@ -84,9 +84,9 @@ function deploy_code {
   TMPDIR=$TMPROOT/`pwgen 20 1`
   local "mkdir -p $TMPROOT"
   local "git clone $CALL_ROOT $TMPDIR"
-  local "cd $TMPROOT && git checkout $COMMIT"
-  local "tar czf deploy.tar.gz -C $TMPROOT ."
-  local "rm -rf $TMPROOT"
+  local "cd $TMPDIR && git checkout $COMMIT"
+  local "tar czf deploy.tar.gz -C $TMPDIR ."
+  local "rm -rf $TMPDIR"
   local "scp deploy.tar.gz $HOST:$DEPLOY_TO/deploy.tar.gz"
   local "rm deploy.tar.gz"
 
