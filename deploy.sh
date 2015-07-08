@@ -55,7 +55,7 @@ function within_do {
 
 function remote {
   echo -e "${BLUE}$HOST${NOCOLOR}: ${LIGHTBLUE}$1${NOCOLOR}" 1>&2
-  ssh $HOST "bash -c \"$1\""
+  ssh -p $PORT $HOST "bash -c \"$1\""
   STATUS=$?
 
   if [[ $STATUS != 0 ]] ; then
