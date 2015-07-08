@@ -87,7 +87,7 @@ function deploy_code {
   local "cd $TMPDIR && git checkout $COMMIT"
   local "tar czf deploy.tar.gz -C $TMPDIR ."
   local "rm -rf $TMPDIR"
-  local "scp deploy.tar.gz $HOST:$DEPLOY_TO/deploy.tar.gz"
+  local "scp -P $PORT deploy.tar.gz $HOST:$DEPLOY_TO/deploy.tar.gz"
   local "rm deploy.tar.gz"
 
   remote "mkdir $CURRENT_PATH"
