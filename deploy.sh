@@ -17,6 +17,7 @@ TMPROOT=/tmp/deploy
 
 CALL_ROOT="$( cd "$( dirname "$0" )" && pwd )"
 source $CALL_ROOT/deploy.config.sh
+$1
 
 
 # Deploy
