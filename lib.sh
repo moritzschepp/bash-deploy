@@ -12,34 +12,13 @@
 
 TMPROOT=/tmp/deploy
 
-
-# Deployment settings
-
-CALL_ROOT="$( cd "$( dirname "$0" )" && pwd )"
-source $CALL_ROOT/deploy.config.sh
-$1
-
-
-# Deploy
-
-function deploy {
-  setup
-  deploy_code
-  cleanup
-
-  # Your deployment specifics go here
-
-  finalize
-}
-
-
 # Variables
 
-TIMESTAMP=`date +"%Y%m%d%H%M%S"`
-REVISION=`git rev-parse $COMMIT`
-CURRENT_PATH="$DEPLOY_TO/releases/$TIMESTAMP"
-SHARED_PATH="$DEPLOY_TO/shared"
-LINKED_CURRENT_PATH="$DEPLOY_TO/current"
+export TIMESTAMP=`date +"%Y%m%d%H%M%S"`
+export REVISION=`git rev-parse $COMMIT`
+export CURRENT_PATH="$DEPLOY_TO/releases/$TIMESTAMP"
+export SHARED_PATH="$DEPLOY_TO/shared"
+export LINKED_CURRENT_PATH="$DEPLOY_TO/current"
 
 RED="\e[0;31m"
 GREEN="\e[0;32m"
@@ -84,7 +63,7 @@ function setup {
 function deploy_code {
   TMPDIR=$TMPROOT/`pwgen 20 1`
   local "mkdir -p $TMPROOT"
-  local "git clone $CALL_ROOT $TMPDIR"
+  local "git clone $REPO $TMPDIR"
   local "cd $TMPDIR && git checkout $COMMIT"
   local "tar czf deploy.tar.gz -C $TMPDIR ."
   local "rm -rf $TMPDIR"
@@ -109,9 +88,3 @@ function cleanup {
 function finalize {
   echo -e "${GREEN}deployment successful${NOCOLOR}"
 }
-
-
-# Main
-
-echo "Deploying $PHASE"
-deploy

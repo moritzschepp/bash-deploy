@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+
+function deploy {
+  setup
+  deploy_code
+  cleanup
+
+  # Your deployment specifics go here
+
+  finalize
+}
+
+function configure {
+  source deploy/config.sh
+  $1
+  source deploy/lib.sh
+}
+
+configure
+deploy
