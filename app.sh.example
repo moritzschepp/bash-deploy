@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-
 function deploy {
   setup
   deploy_code
