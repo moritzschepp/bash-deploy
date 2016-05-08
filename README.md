@@ -12,12 +12,12 @@ and then go to your project's directory
 
     cd /home/jon/myapp
 
-Now run the installer. This will create a few files below @deploy/@
+Now run the installer. This will create a few files below `deploy/`
 
     /home/jon/bash-deploy/install.sh
 
-Modify @deploy/config.sh@ according to your target hosts. This file should also
-go to gitignore. @deploy/app.sh@ is the place where you add your project
+Modify `deploy/config.sh` according to your target hosts. This file should also
+go to gitignore. `deploy/app.sh` is the place where you add your project
 specific deployment steps.
 
 ## Upgrading
